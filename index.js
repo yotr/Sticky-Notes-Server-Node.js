@@ -20,11 +20,11 @@ app.use(express.json());
 // app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(morgan('common'));
-// app.use(cors({
-//     origin: ["http://localhost:5173"],
-//     methods: ['GET', 'POST'],
-//     credentials: true
-// }));
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
 
 
 //router
