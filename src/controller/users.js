@@ -68,7 +68,7 @@ const methods = {
                             }
                         })
                     } else {
-                        return res.status(404).send({ message: "incorrect password", user: user[0] })
+                        return res.status(404).send({ message: "incorrect email or password", status: 404 });
                     }
                 }
             })

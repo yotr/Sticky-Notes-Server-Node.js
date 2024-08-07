@@ -20,6 +20,12 @@ router.use('/api/notes/users', require('./notes/getUserNotes')); // get all note
 
 
 
+// titles
+router.use('/api/titles/create', require('./titles/createTitle')); //create titles
+router.use('/api/titles/update', require('./titles/updateTitle')); //create titles
+router.use('/api/titles/delete', require('./titles/deleteTitle')); //delete titles
+router.use('/api/titles', require('./titles/getTitles')); // get all titles
+router.use('/api/titles/users', require('./titles/getUserTitles')); // get all titles
 
 
 
