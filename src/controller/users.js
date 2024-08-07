@@ -62,6 +62,7 @@ const methods = {
                             message: "logged in successfully",
                             status: 200,
                             user: {
+                                id: user[0]?.id,
                                 name: user[0]?.name,
                                 email: user[0]?.email,
                             }
