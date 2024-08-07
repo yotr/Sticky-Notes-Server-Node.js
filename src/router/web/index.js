@@ -3,7 +3,7 @@ const router = require('express').Router();
 //users
 // router.use('/user/create', require('./user/auth/register')); //create user
 // router.use('/user/login', require('./user/auth/login')); // user login
-router.use('/users', require('./user/getUsers')); // get all users
+router.use('/api/users', require('./user/getUsers')); // get all users
 // router.use('/user/get', require('./user/auth/getUser')); // get user by id
 // router.use('/user/update', require('./user/auth/update')); // update user by id
 
