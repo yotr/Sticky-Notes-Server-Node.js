@@ -6,7 +6,7 @@ const methods = {
 
             let sql = "SELECT * FROM notes"
 
-            db.query(sql, (err, notes) => {
+            await db.query(sql, (err, notes) => {
                 if (err) return res.status(404).send({ error: err })
                 if (notes) return res.status(200).send(notes);
             })
@@ -15,16 +15,31 @@ const methods = {
             return res.status(404).send({ error });
         }
     },
+    async getUserNotes(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            let getUserNoteQuery = "SELECT * FROM notes WHERE USERID = ?";
+
+            await db.query(getUserNoteQuery, [id], (err, result) => {
+                if (err) return res.status(404).send({ error: err })
+                if (result) return res.status(200).send(result);
+            })
+
+
+        } catch (error) {
+            return res.status(500).send(error);
+        }
+    },
     async createNote(req, res, next) {
         try {
             const { body, colors, position, userId } = req.body;
 
-
             let createNoteQuery = "INSERT INTO notes (body,colors,position,userId) VALUES (?, ?, ?,?)";
 
-            db.query(createNoteQuery, [body, colors, position, userId], (err, result) => {
+            await db.query(createNoteQuery, [body, colors, position, userId], (err, result) => {
                 if (err) return res.status(404).send({ error: err })
-                if (result) return res.status(200).send({ message: 'note created successfully...', id: result.insertId });
+                if (result) return res.status(200).send({ message: 'note created successfully...', status: 200, id: result.insertId });
             })
 
 

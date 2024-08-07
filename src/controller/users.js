@@ -7,7 +7,7 @@ const methods = {
 
             let sql = "SELECT * FROM users"
 
-            db.query(sql, (err, users) => {
+            await db.query(sql, (err, users) => {
                 if (err) throw new Error(err)
                 if (users) return res.status(200).send(users);
             })
@@ -25,13 +25,13 @@ const methods = {
             await db.query(usersQuery, [email], (err, user) => {
                 if (err) return res.status(404).send({ error: err })
                 if (user) {
-                    if (user?.length > 0) return res.status(404).send({ message: 'please enter unique email address.' });
+                    if (user?.length > 0) return res.status(404).send({ message: 'please enter unique email address.', status: 404 });
                     // add new user
                     if (password) {
                         let createUserQuery = "INSERT INTO users (name,email,password) VALUES (?, ?, ?)";
                         db.query(createUserQuery, [name, email, password], (err, result) => {
                             if (err) return res.status(404).send({ error: err })
-                            if (result) return res.status(200).send({ message: 'user created successfully...', id: result.insertId });
+                            if (result) return res.status(200).send({ message: 'user created successfully...', status: 200, id: result.insertId });
                         })
                     }
                     else {

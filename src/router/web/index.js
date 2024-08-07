@@ -14,6 +14,7 @@ router.use('/api/users', require('./user/getUsers')); // get all users
 // notes
 router.use('/api/notes/create', require('./notes/createNote')); //create notes
 router.use('/api/notes', require('./notes/getNotes')); // get all notes
+router.use('/api/notes/users', require('./notes/getUserNotes')); // get all notes
 
 
 
