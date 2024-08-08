@@ -84,25 +84,23 @@ const methods = {
             let sql1 = `SELECT * FROM notes WHERE userId = ${id}`;
             let sql2 = `SELECT * FROM titles WHERE userId = ${id}`;
 
-            // let sql = `SELECT * FROM notes n JOIN (SELECT * FROM titles WHERE userId = ${id}) t ON n.userId = t.userId`
-
             let notes = []
-            let titles = []
 
-            await db.query(sql1, async (err, notesResuld) => {
-                if (err) throw res.status(404).send({ error: err })
+            await db.query(sql1, (err, notesResuld) => {
+                if (err) return res.status(404).send({ error: err })
                 if (notesResuld) {
                     notes = notesResuld
-                    // then
-                    await db.query(sql2, (err, titlesResult) => {
-                        if (err) throw res.status(404).send({ error: err })
+                    //   then get titles
+                    db.query(sql2, (err, titlesResult) => {
+                        if (err) return res.status(404).send({ error: err })
                         if (titlesResult) {
-                            titles = titlesResult
-                            return res.status(200).send({ status: 200, notes: notes, titles: titles });
+                            return res.status(200).send({ status: 200, notes: notes, titles: titlesResult });
                         }
                     })
+
                 }
             })
+
 
         } catch (error) {
             return res.status(404).send({ error });
