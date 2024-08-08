@@ -66,6 +66,24 @@ const methods = {
             return res.status(500).send(error);
         }
     },
+    async updateNoteColor(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            const { colors } = req.body;
+
+            let updateNoteQuery = `UPDATE notes SET colors = ? WHERE id = ${id}`;
+
+            await db.query(updateNoteQuery, [colors], (err, result) => {
+                if (err) return res.status(404).send({ message: err, status: 404 })
+                if (result) return res.status(200).send({ message: 'note updated successfully...', status: 200 });
+            })
+
+
+        } catch (error) {
+            return res.status(500).send(error);
+        }
+    },
     async deleteNote(req, res, next) {
         try {
             const id = req.params.id;

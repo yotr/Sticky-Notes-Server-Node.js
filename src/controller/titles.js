@@ -66,6 +66,24 @@ const methods = {
             return res.status(500).send(error);
         }
     },
+    async updateTitleColor(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            const { color } = req.body;
+
+            let updateTitleQuery = `UPDATE titles SET color = ? WHERE id = ${id}`;
+
+            await db.query(updateTitleQuery, [color], (err, result) => {
+                if (err) return res.status(404).send({ message: err, status: 404 })
+                if (result) return res.status(200).send({ message: 'title updated successfully...', status: 200 });
+            })
+
+
+        } catch (error) {
+            return res.status(500).send(error);
+        }
+    },
     async deleteTitle(req, res, next) {
         try {
             const id = req.params.id;

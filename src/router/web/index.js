@@ -14,6 +14,7 @@ router.use('/api/users', require('./user/getUsers')); // get all users
 // notes
 router.use('/api/notes/create', require('./notes/createNote')); //create notes
 router.use('/api/notes/update', require('./notes/updateNote')); //create notes
+router.use('/api/notes/update/color', require('./notes/updateNoteColor')); //create note color
 router.use('/api/notes/delete', require('./notes/deleteNote')); //delete notes
 router.use('/api/notes', require('./notes/getNotes')); // get all notes
 router.use('/api/notes/users', require('./notes/getUserNotes')); // get all notes
@@ -23,6 +24,7 @@ router.use('/api/notes/users', require('./notes/getUserNotes')); // get all note
 // titles
 router.use('/api/titles/create', require('./titles/createTitle')); //create titles
 router.use('/api/titles/update', require('./titles/updateTitle')); //create titles
+router.use('/api/titles/update/color', require('./titles/updateTitleColor')); //create title color
 router.use('/api/titles/delete', require('./titles/deleteTitle')); //delete titles
 router.use('/api/titles', require('./titles/getTitles')); // get all titles
 router.use('/api/titles/users', require('./titles/getUserTitles')); // get all titles
