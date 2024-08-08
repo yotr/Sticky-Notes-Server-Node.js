@@ -4,6 +4,7 @@ const router = require('express').Router();
 router.use('/api/users/create', require('./user/createUser')); //create user
 router.use('/api/users/login', require('./user/userLogin')); // user login
 router.use('/api/users', require('./user/getUsers')); // get all users
+router.use('/api/users/data', require('./user/getUserData')); // get user data
 // router.use('/user/get', require('./user/auth/getUser')); // get user by id
 // router.use('/user/update', require('./user/auth/update')); // update user by id
 // router.use('/generateOTP', require('./user/auth/generateOTP')); // generate OTP to verify user;

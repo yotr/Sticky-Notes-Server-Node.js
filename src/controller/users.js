@@ -77,6 +77,37 @@ const methods = {
             return res.status(500).send({ error });
         }
     },
+    async getUserData(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            let sql1 = `SELECT * FROM notes WHERE userId = ${id}`;
+            let sql2 = `SELECT * FROM titles WHERE userId = ${id}`;
+
+            // let sql = `SELECT * FROM notes n JOIN (SELECT * FROM titles WHERE userId = ${id}) t ON n.userId = t.userId`
+
+            let notes = []
+            let titles = []
+
+            await db.query(sql1, async (err, notesResuld) => {
+                if (err) throw res.status(404).send({ error: err })
+                if (notesResuld) {
+                    notes = notesResuld
+                    // then
+                    await db.query(sql2, (err, titlesResult) => {
+                        if (err) throw res.status(404).send({ error: err })
+                        if (titlesResult) {
+                            titles = titlesResult
+                            return res.status(200).send({ status: 200, notes: notes, titles: titles });
+                        }
+                    })
+                }
+            })
+
+        } catch (error) {
+            return res.status(404).send({ error });
+        }
+    },
 }
 
 module.exports = { ...methods }
